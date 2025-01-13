@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Billing Form</title>
+
+  <style>
+    .container {
+   /*    max-width: 1200px; */
+      max-width: 400px;
+       margin: 0 auto;
+       padding: 20px;
+  /*     display: grid;
+       grid-template-columns: 2fr 1fr;
+       gap: 40px;  */
+       display: flex;
+       flex-wrap: wrap;
+       gap:20px;
+       background-color: #1a1d21;
+       color: white;
+   }
+
+   .form-section {
+       padding: 20px;
+       margin-top:-15px;
+   }
+
+   .cart-section {
+       background-color: #2c3035;
+       padding: 20px;
+       border-radius: 8px;
+   }
+
+   .form-row {
+       margin-bottom: 20px;
+   }
+
+   .form-grid {
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 20px;
+   }
+
+   input, select {
+       width: 100%;
+       padding: 10px;
+       border: 1px solid #373b3e;
+       border-radius: 4px;
+       background-color: #2c3035;
+       color: white;
+       margin-top: 5px;
+   }
+
+   .username-input {
+       display: flex;
+       align-items: center;
+       background-color: #2c3035;
+       border-radius: 4px;
+   }
+
+   .username-input span {
+       padding: 10px;
+       color: #6c757d;
+   }
+
+   .cart-item {
+       display: flex;
+       justify-content: space-between;
+       padding: 10px 0;
+       border-bottom: 1px solid #373b3e;
+   }
+
+   .promo-section {
+       display: flex;
+       gap: 10px;
+       margin-top: 20px;
+   }
+
+   .promo-section input {
+       flex: 1;
+   }
+
+   .promo-section button {
+       padding: 10px 20px;
+       background-color: #6c757d;
+       border: none;
+       border-radius: 4px;
+       color: white;
+       cursor: pointer;
+   }
+
+   .checkbox-group {
+       margin-top: 20px;
+   }
+
+   .checkbox-group label {
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       margin-bottom: 10px;
+   }
+
+   .promo-code {
+       color: #28a745;
+   }
+
+    .bt{
+    margin-top:-25px;
+    }
+
+    .error{
+    color:yellow;
+    }
+
+  </style>
+
+</head>
+<body>
+
+<form th:action="@{/processForm}" th:object="${customer}" method="POST">
+  <div class="container">
+    <div class="form-section">
+      <center><h2>Billing address</h2></center>
+      <div >
+        <div class="form-row">
+          <label>First name</label>
+          <input type="text" placeholder="Enter First Name" th:field="*{firstName}">
+          <br>
+          <!-- Error -->
+          <span th:if="${#fields.hasErrors('firstName')}"
+                th:errors="*{firstName}"
+                class="error"></span>
+
+        </div>
+
+        <div class="form-row">
+          <label>Last name</label>
+          <input type="text" placeholder="Enter Last Name" th:field="*{lastName}">
+          <br>
+          <!-- Error -->
+          <span th:if="${#fields.hasErrors('lastName')}"
+                th:errors="*{lastName}"
+                class="error"></span>
+
+        </div>
+
+
+      </div>
+
+      <div class="form-row">
+        <label>Username</label>
+        <div class="username-input">
+          <span>@</span>
+          <input type="text" placeholder="Username" th:field="*{username}" />
+        </div>
+        <!-- Error -->
+        <span th:if="${#fields.hasErrors('username')}"
+              th:errors="*{username}"
+              class="error"></span>
+
+      </div>
+
+      <div class="form-row">
+        <label>Email (Optional)</label>
+        <input type="email" placeholder="you@example.com" th:field="*{email}">
+      </div>
+
+      <div class="form-row">
+        <label>Address</label>
+        <input type="text" placeholder="1234 Main St" th:field="*{address}">
+        <br>
+        <!-- Error -->
+        <span th:if="${#fields.hasErrors('address')}"
+              th:errors="*{address}"
+              class="error"></span>
+
+      </div>
+
+
+      <div class="form-row">
+        <label>Address 2 (Optional)</label>
+        <input type="text" placeholder="Apartment or suite" th:field="*{address2}">
+      </div>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Country</label>
+          <select th:field="*{country}">
+            <option th:value="Choose...">Choose...</option>
+            <option th:value="India">India</option>
+            <option th:value="Dubai">Dubai</option>
+            <option th:value="Spain">Mexico</option>
+            <option th:value="England">England</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>State</label>
+          <select th:field="*{state}">
+            <option th:value="Choose...">Choose...</option>
+        <!--    <option th:value="'Uttar Pradesh'">Uttar Pradesh</option> -->
+            <option th:value="Madrid">Madrid</option>
+            <option th:value="London">London</option>
+            <option th:value="LiverPool">LiverPool</option>
+            <option th:value="Deira">Deira</option>
+          </select>
+        </div>
+
+        <!-- <div class="form-row">
+            <label>Zip</label>
+            <input type="text" placeholder="Zip">
+        </div>-->
+
+      </div>
+
+      <!--
+       <div class="checkbox-group">
+          <label>
+              <input type="checkbox">
+              Shipping address is the same as my billing address
+          </label>
+          <label>
+              <input type="checkbox">
+              Save this information for next time
+          </label>
+      </div>-->
+
+    </div>
+
+
+    <!--
+    <div class="cart-section">
+        <h3>Your cart</h3>
+        <div class="cart-item">
+            <div>Product name</div>
+            <div>$12</div>
+        </div>
+        <div class="cart-item">
+            <div>Second product</div>
+            <div>$8</div>
+        </div>
+        <div class="cart-item">
+            <div>Third item</div>
+            <div>$5</div>
+        </div>
+        <div class="cart-item promo-code">
+            <div>EXAMPLECODE</div>
+            <div>-$5</div>
+        </div>
+        <div class="cart-item">
+            <strong>Total (USD)</strong>
+            <strong>$20</strong>
+        </div>
+
+        <div class="promo-section">
+            <input type="text" placeholder="Promo code">
+            <button type="submit">Redeem</button>
+        </div>
+    </div>
+</div>
+-->
+
+    <input type="submit" value="Submit" class="bt">
+
+</form>
+
+</body>
+</html>
