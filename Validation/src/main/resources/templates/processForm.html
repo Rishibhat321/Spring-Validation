@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Confirmation</title>
+</head>
+<body>
+
+<h2>Customer Confirmation</h2>
+
+Customer Name: <span th:text="${customer.firstName} + ' ' + ${customer.lastName}"></span>
+<br><br>
+
+Username: <span th:text="${customer.username}"></span>
+<br><br>
+
+Email: <span th:text="${customer.email}"></span>
+<br><br>
+
+Address: <span th:text="${customer.address}"></span>
+<br><br>
+
+Address2: <span th:text="${customer.address2}"></span>
+<br><br>
+
+Favorite Country: <span th:text="${customer.country}"></span>
+<br><br>
+
+State: <span th:text="${customer.state}"></span>
+<br><br>
+
+
+</body>
+</html>
