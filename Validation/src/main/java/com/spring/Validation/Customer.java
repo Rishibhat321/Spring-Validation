@@ -4,22 +4,24 @@ import jakarta.validation.constraints.NotNull;
 
 public class Customer {
 
-    @NotNull
-    private String firstName;
+    @NotNull(message="is required")
+    private String firstName = "";
 
-    @NotNull
-    private String lastName;
+    @NotNull(message="is required")
+    private String lastName = "";
 
-    @NotNull
-    private String username;
+    @NotNull(message="is required")
+    private String username="";
 
     private String email;
 
-    @NotNull
-    private String address;
+    @NotNull(message="is required")
+    private String address="";
 
     private String address2;
+
     private String country;
+
     private String state;
 
     public String getAddress2() {
